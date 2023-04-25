@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbResumeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TBLCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBLContact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameSurname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TBLProfile">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileTitle" Type="nvarchar(max)" />
+          <Property Name="ProfileDescription" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SocialMedia1" Type="nvarchar" MaxLength="100" />
+          <Property Name="SocialMedia2" Type="nvarchar" MaxLength="100" />
+          <Property Name="SocialMedia3" Type="nvarchar" MaxLength="100" />
+          <Property Name="SocialMedia4" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TBLProject">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProjectDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectImageUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TBLReviews">
+          <Key>
+            <PropertyRef Name="ReviewsID" />
+          </Key>
+          <Property Name="ReviewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReviewsNameSurname" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReviewsJob" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReviewsMessage" Type="nvarchar(max)" />
+          <Property Name="ReviewsImage" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TBLServices">
+          <Key>
+            <PropertyRef Name="ServicesID" />
+          </Key>
+          <Property Name="ServicesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServicesTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="ServicesIcon" Type="nvarchar" MaxLength="100" />
+          <Property Name="ServicesDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TBLSkill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="SkillDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="SkillIcon" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBLTechnology">
+          <Key>
+            <PropertyRef Name="TechnologyId" />
+          </Key>
+          <Property Name="TechnologyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechnologyTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="TechnologyCalue" Type="int" />
+        </EntityType>
+        <Association Name="FK_TBLContact_TBLCategory">
+          <End Role="TBLCategory" Type="Self.TBLCategory" Multiplicity="0..1" />
+          <End Role="TBLContact" Type="Self.TBLContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="TBLContact">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CountProjeTalebi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DbResumeModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLCategory" EntityType="Self.TBLCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLContact" EntityType="Self.TBLContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLProfile" EntityType="Self.TBLProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLProject" EntityType="Self.TBLProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLReviews" EntityType="Self.TBLReviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLServices" EntityType="Self.TBLServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLSkill" EntityType="Self.TBLSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLTechnology" EntityType="Self.TBLTechnology" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLContact_TBLCategory" Association="Self.FK_TBLContact_TBLCategory">
+            <End Role="TBLCategory" EntitySet="TBLCategory" />
+            <End Role="TBLContact" EntitySet="TBLContact" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbResumeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLProfile">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SocialMedia1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SocialMedia2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SocialMedia3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SocialMedia4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBLProject">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBLSkill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="SkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SkillDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SkillIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBLTechnology">
+          <Key>
+            <PropertyRef Name="TechnologyId" />
+          </Key>
+          <Property Name="TechnologyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechnologyTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TechnologyCalue" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="DbResumeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLProfile" EntityType="Self.TBLProfile" />
+          <EntitySet Name="TBLProject" EntityType="Self.TBLProject" />
+          <EntitySet Name="TBLSkill" EntityType="Self.TBLSkill" />
+          <EntitySet Name="TBLTechnology" EntityType="Self.TBLTechnology" />
+          <EntitySet Name="TBLContact" EntityType="DbResumeModel.TBLContact" />
+          <EntitySet Name="sysdiagrams" EntityType="DbResumeModel.sysdiagrams" />
+          <EntitySet Name="TBLCategory" EntityType="DbResumeModel.TBLCategory" />
+          <AssociationSet Name="FK_TBLContact_TBLCategory" Association="DbResumeModel.FK_TBLContact_TBLCategory">
+            <End Role="TBLCategory" EntitySet="TBLCategory" />
+            <End Role="TBLContact" EntitySet="TBLContact" />
+          </AssociationSet>
+          <FunctionImport Name="CountProjeTalebi" ReturnType="Collection(Int32)" />
+          <EntitySet Name="TBLServices" EntityType="DbResumeModel.TBLServices" />
+          <EntitySet Name="TBLReviews" EntityType="DbResumeModel.TBLReviews" />
+        </EntityContainer>
+        <EntityType Name="TBLContact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TBLCategory" Relationship="DbResumeModel.FK_TBLContact_TBLCategory" FromRole="TBLContact" ToRole="TBLCategory" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBLCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBLContact" Relationship="DbResumeModel.FK_TBLContact_TBLCategory" FromRole="TBLCategory" ToRole="TBLContact" />
+        </EntityType>
+        <Association Name="FK_TBLContact_TBLCategory">
+          <End Type="DbResumeModel.TBLCategory" Role="TBLCategory" Multiplicity="0..1" />
+          <End Type="DbResumeModel.TBLContact" Role="TBLContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="TBLContact">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TBLServices">
+          <Key>
+            <PropertyRef Name="ServicesID" />
+          </Key>
+          <Property Name="ServicesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServicesTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ServicesIcon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ServicesDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBLReviews">
+          <Key>
+            <PropertyRef Name="ReviewsID" />
+          </Key>
+          <Property Name="ReviewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewsNameSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewsJob" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewsMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewsImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbResumeModelStoreContainer" CdmEntityContainer="DbResumeEntities">
+          <EntitySetMapping Name="TBLProfile">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLProfile">
+              <MappingFragment StoreEntitySet="TBLProfile">
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="ProfileTitle" ColumnName="ProfileTitle" />
+                <ScalarProperty Name="ProfileDescription" ColumnName="ProfileDescription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SocialMedia1" ColumnName="SocialMedia1" />
+                <ScalarProperty Name="SocialMedia2" ColumnName="SocialMedia2" />
+                <ScalarProperty Name="SocialMedia3" ColumnName="SocialMedia3" />
+                <ScalarProperty Name="SocialMedia4" ColumnName="SocialMedia4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLProject">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLProject">
+              <MappingFragment StoreEntitySet="TBLProject">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="ProjectImageUrl" ColumnName="ProjectImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLSkill">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLSkill">
+              <MappingFragment StoreEntitySet="TBLSkill">
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="SkillTitle" ColumnName="SkillTitle" />
+                <ScalarProperty Name="SkillDescription" ColumnName="SkillDescription" />
+                <ScalarProperty Name="SkillIcon" ColumnName="SkillIcon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLTechnology">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLTechnology">
+              <MappingFragment StoreEntitySet="TBLTechnology">
+                <ScalarProperty Name="TechnologyId" ColumnName="TechnologyId" />
+                <ScalarProperty Name="TechnologyTitle" ColumnName="TechnologyTitle" />
+                <ScalarProperty Name="TechnologyCalue" ColumnName="TechnologyCalue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLContact">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLContact">
+              <MappingFragment StoreEntitySet="TBLContact">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DbResumeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLCategory">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLCategory">
+              <MappingFragment StoreEntitySet="TBLCategory">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CountProjeTalebi" FunctionName="DbResumeModel.Store.CountProjeTalebi" />
+          <EntitySetMapping Name="TBLServices">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLServices">
+              <MappingFragment StoreEntitySet="TBLServices">
+                <ScalarProperty Name="ServicesDescription" ColumnName="ServicesDescription" />
+                <ScalarProperty Name="ServicesIcon" ColumnName="ServicesIcon" />
+                <ScalarProperty Name="ServicesTitle" ColumnName="ServicesTitle" />
+                <ScalarProperty Name="ServicesID" ColumnName="ServicesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLReviews">
+            <EntityTypeMapping TypeName="DbResumeModel.TBLReviews">
+              <MappingFragment StoreEntitySet="TBLReviews">
+                <ScalarProperty Name="ReviewsImage" ColumnName="ReviewsImage" />
+                <ScalarProperty Name="ReviewsMessage" ColumnName="ReviewsMessage" />
+                <ScalarProperty Name="ReviewsJob" ColumnName="ReviewsJob" />
+                <ScalarProperty Name="ReviewsNameSurname" ColumnName="ReviewsNameSurname" />
+                <ScalarProperty Name="ReviewsID" ColumnName="ReviewsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

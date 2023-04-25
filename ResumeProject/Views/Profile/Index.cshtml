@@ -1,0 +1,46 @@
+﻿@using ResumeProject.Models
+@model List<TBLProfile>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Başlık</th>
+        <th>Tanım</th>
+        <th>Ad</th>
+        <th>Mail</th>
+        <th>Adres</th>
+        <th>Telefon</th>
+        <th>Sosyal Medya 1</th>
+        <th>Sosyal Medya 2</th>
+        <th>Sosyal Medya 3</th>
+        <th>Sosyal Medya 4</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    @foreach(var item in Model)
+            {
+        count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.ProfileTitle</td>
+                    <td>@item.ProfileDescription</td>
+                    <td>@item.Name</td>
+                    <td>@item.Mail</td>
+                    <td>@item.Address</td>
+                    <td>@item.Phone</td>
+                    <td>@item.SocialMedia1</td>
+                    <td>@item.SocialMedia2</td>
+                    <td>@item.SocialMedia3</td>
+                    <td>@item.SocialMedia4</td>
+                    <td><a href="/Profile/ProfileDelete/@item.ProfileId" class="btn btn-outline-danger">Sil</a></td>
+                    <td><a href="/Profile/ProfileUpdate/@item.ProfileId" class="btn btn-outline-warning">Güncelle</a></td>
+                </tr>
+            }
+</table>
+<a href="/Profile/ProfileAdd/" class="btn btn-success">Yeni Profil Ekle</a>

@@ -1,0 +1,27 @@
+﻿@using ResumeProject.Models
+@model List<TBLCategory>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Category Adı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        <th>Mesaj Türü</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryID</td>
+            <td>@item.CategoryName</td>
+            <td><a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-warning">Güncelle</a></td>
+            <td><a href="/Category/GetMessageBySubject/@item.CategoryID" class="btn btn-outline-dark">Masaj Aç</a></td>
+        </tr>
+    }
+</table>
+<a href="/Category/AddCategory/" class="btn btn-success">Kategori Ekle</a>

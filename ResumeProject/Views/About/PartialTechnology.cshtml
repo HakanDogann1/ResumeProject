@@ -1,0 +1,15 @@
+﻿@using ResumeProject.Models
+@model List<TBLTechnology>
+
+@foreach (var item in Model)
+{
+
+<div class="progress-info mt-5">
+    <h6 class="progress-tittle">@item.TechnologyTitle</h6>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @item.TechnologyCalue%"
+             aria-valuenow="@item.TechnologyCalue" aria-valuemin="0" aria-valuemax="100">
+        </div>
+    </div>
+</div>
+}

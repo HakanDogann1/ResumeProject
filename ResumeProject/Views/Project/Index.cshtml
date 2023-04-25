@@ -1,0 +1,31 @@
+﻿@using ResumeProject.Models
+@model List<TBLProject>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Başlık</th>
+        <th>Tanım</th>
+        <th>Resim</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.ProjectTitle</td>
+            <td>@item.ProjectDescription</td>
+            <td>@item.ProjectImageUrl</td>
+            <td><a href="/Project/ProjectDelete/@item.ProjectId" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="/Project/ProjectUpdate/@item.ProjectId" class="btn btn-outline-warning">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Project/ProjectAdd/" class="btn btn-outline-success">Proje Ekle</a>

@@ -1,0 +1,30 @@
+﻿@using ResumeProject.Models
+@model List<TBLContact>
+@{
+    ViewBag.Title = "GetMessageBySubject";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Konuya Göre Gelen Mesajlar</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>AD Soyad</th>
+        <th>Konu</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Mesaj Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ContactId</td>
+            <td>@item.NameSurname</td>
+            <td>@item.TBLCategory.CategoryName</td>
+            <td>@item.Date</td>
+            <td><a href="/Contact/DeleteContact/@item.ContactId" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="#" class="btn btn-outline-dark">Mesaj Aç</a></td>
+        </tr>
+    }
+</table>
+
